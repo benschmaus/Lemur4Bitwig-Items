@@ -1,0 +1,40 @@
+<JZML>
+<WINDOW class="Canvas" text="MixFader" x="0" y="0" width="78" height="348" id="2" state="5" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" redrawMode="1" touchSupport="1">
+<VARIABLE name="outx=" value="0.752874" send="17" osc_target="0" osc_trigger="1" osc_message="/MixFader/outx" midi_target="0" midi_trigger="1" midi_message="0xB0,0xB0,21,21" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="outz=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/MixFader/outz" midi_target="0" midi_trigger="1" midi_message="0xB0,0xB0,22,22" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="touchy=" value="128.000000" send="1" osc_target="0" osc_trigger="1" osc_message="/MixFader/touchy" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="1278,68,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="speed=re[3]" send="1" osc_target="0" osc_trigger="1" osc_message="/MixFader/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="re=getattribute(getobject(),'rect')" send="1" osc_target="0" osc_trigger="1" osc_message="/MixFader/re" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<SCRIPT name="draw()" script="decl c =getobject();
+decl rect=getattribute(c,'rect');
+decl w=rect[2];
+decl h=rect[3];
+canvas_clear(c);
+canvas_setFillStyle(c,.3*outx+.2);				// fader style
+canvas_setStrokeStyle(c,{0.5,0,0,0});			// fader stroke
+canvas_fillRect(c,10,0,w-50,h);				// fader light to dark effect
+canvas_strokeRect(c,10,0,w-50,h);				// fader stroke
+canvas_strokeRect(c,40,0,w-50,h);				// metering
+canvas_setFillStyle(c,{.8,outz,1,outz});		// cap style
+canvas_setStrokeStyle(c,{0,1,0});				// cap stroke
+canvas_fillRect(c,0,(1-outx)*(h-40),w,40);		// cap fill color
+canvas_strokeRect(c,0,(1-outx)*(h-40),w,40);
+
+" trigger_script="" trigger_type="255" trigger_name="onRedraw" trigger="1" clock="0" clock_div="4" osc_message="/MixFader/draw" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
+<SCRIPT name="onTouchMove(cursor,hit,x,y)" script="decl h=re[3];
+decl dy=y-touchy;
+touchy=y;
+outx=clamp(outx-dy/speed,0,1);
+canvas_refresh(getobject());
+" trigger_script="" trigger_type="255" trigger_name="onCursorMove" trigger="1" clock="0" clock_div="4" osc_message="/MixFader/onTouchMove" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
+<SCRIPT name="onTouchDown(cursor,hit,x,y)" script="outz=1;
+touchy=y;
+canvas_refresh(getobject());
+" trigger_script="" trigger_type="255" trigger_name="onCursorDown" trigger="1" clock="0" clock_div="4" osc_message="/MixFader/onTouchDown" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
+<SCRIPT name="onTouchUp(cursor,hit,x,y)" script="outz=0;
+canvas_refresh(getobject());
+" trigger_script="" trigger_type="255" trigger_name="onCursorUp" trigger="1" clock="0" clock_div="4" osc_message="/MixFader/onTouchUp" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
+<SCRIPT name="init()" script="decl c=getobject();
+canvas_refresh(c);" trigger_script="" trigger_type="5" trigger="1" clock="0" clock_div="4" osc_message="/MixFader/init" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
+</WINDOW>
+</JZML>
