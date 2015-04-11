@@ -64,9 +64,7 @@
 <VARIABLE name="clipishit=" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/clipishit" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,13107,16307" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="configured=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/configured" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="hittype_clip_startindex=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/hittype_clip_startindex" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<SCRIPT name="onCursorDown(cursor,hit,x,y)" script="
-
-decl hitcounter = 0;
+<SCRIPT name="onCursorDown(cursor,hit,x,y)" script="decl hitcounter = 0;
 decl i;
 for(i=0;i<multitouch_cursors;i++){
  if(cursors_alive[i] == 0){
@@ -108,8 +106,8 @@ if(hitboxtype[hit] == hittype_clip){
  //Make sure the cursor up event happens on the same clip that was pressed
  if(clipishit[hit-hittype_clip_startindex]){
   decl basehit = hit - hittype_clip_startindex;
-  decl track = round(basehit / numtracks + 1);
-  decl clip = round(basehit % numclips + 1);
+  decl track = floor(basehit / numtracks + 1);
+  decl clip = floor(basehit % numclips + 1);
   oscout(0,'/track/' + track + '/clip/' + clip + '/launch',{1});
  }
  clipishit[hit-hittype_clip_startindex]=0;
