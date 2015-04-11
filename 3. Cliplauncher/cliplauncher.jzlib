@@ -127,7 +127,7 @@ if(hitboxtype[hit] == hittype_clip){
 }
 " trigger_script="" trigger_type="255" trigger_name="onCursorUp" trigger="1" clock="0" clock_div="4" osc_message="/Cliplauncher/onCursorUp" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 <SCRIPT name="onload()" script="configured = 0;
-canvas_rendering_optimizations = 0;
+canvas_rendering_optimizations = 1;
 redraw_needed = 1;" trigger_script="" trigger_type="5" trigger="1" clock="0" clock_div="4" osc_message="/Cliplauncher/onload" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 <SCRIPT name="osc_clipcolor(OSC_ARGS)" script="decl targettrack = OSC_ARGS[0];
 decl targetclip = OSC_ARGS[1];
