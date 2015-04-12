@@ -69,6 +69,8 @@
 <VARIABLE name="hittype_track_startindex=" value="89" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/hittype_track_startindex" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="3692,18976,79" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="track_selected=" value="0,0,0,0,0,0,0,0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/track_selected" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="color_selecttrack=" value="0.310000,0.310000,0.310000" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_selecttrack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="color_clipstop=" value="0.380000,0.380000,0.380000" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_clipstop" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="color_cliprecord=" value="0.500000,0.500000,0.500000" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_cliprecord" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="onCursorDown(cursor,hit,x,y)" script="decl hitcounter = 0;
 decl i;
 for(i=0;i<multitouch_cursors;i++){
@@ -217,10 +219,42 @@ for(x=0;x<numtracks;x++){
    canvas_setFillStyle(c,{0});
    canvas_fillText(c,clipnames[clipnum],startx + clip_width/2,starty + clip_height/(numclips/2),clip_width - clip_width/numtracks);
 
+  if(clips_recording[clipnum]){
+   canvas_beginPath(c);
+   canvas_arc(c,startx+clip_width/2, starty+clip_height/2, clip_width / 6, 0, 3.14*2,0);
+   canvas_setFillStyle(c,color_cliprecord);
+   canvas_fill(c);
+   canvas_stroke(c);
+  }else if(clips_playing[clipnum]){
+   canvas_beginPath(c);
+   canvas_moveTo(c,startx + clip_width/2.6 , starty + clip_height/2.5 );
+   canvas_lineTo(c, startx + clip_width/2.6 , starty + clip_height/1.25);
+   canvas_lineTo(c, startx + clip_width/1.5 , starty + clip_height/1.8 );
+   canvas_setFillStyle(c,color_cliprecord);
+   canvas_fill(c);
+   canvas_stroke(c);
+  }
+
   } else{
    canvas_setFillStyle(c,color_emptyclip);
    canvas_fill(c);
-   canvas_stroke(c);
+   canvas_stroke(c);
+   canvas_closePath(c);
+
+   canvas_beginPath(c);
+   //Draw record icon
+   if(track_recording[x]){
+    
+    canvas_arc(c,(startx+5+clip_width / 12), (starty+5+clip_width / 12), clip_width / 12, 0, 3.14*2,0);
+    canvas_setFillStyle(c,color_cliprecord);
+   //Draw stop icon
+   }else{
+    canvas_rect(c, startx+5, starty + 5, clip_width / 6, clip_width / 6);
+    canvas_setFillStyle(c,color_clipstop);
+   }
+   
+   canvas_fill(c);
+   canvas_stroke(c);
   }
 
  clip_redraw_list[clipnum] = 0;
@@ -410,6 +444,8 @@ color_tracktext={0.81,0.81,0.81};
 color_emptytrack={0.22,0.22,0.22};
 color_selecttrack={0.31,0.31,0.31};
 color_emptyclip={0.27,0.27,0.27};
+color_clipstop={0.38,0.38,0.38};
+color_cliprecord={0.50,0.50,0.50};
 color_border={0.0898,0.0898,0.0898};
 
 hittype_clip_size = numclips*numtracks;
@@ -541,11 +577,15 @@ if(track_arranger[targettrack] != OSC_ARGS[1]){
 decl targetclip = OSC_ARGS[1];
 
 
-
 decl clipindex = numclips*targettrack + targetclip;
 
 if(clips_playing[clipindex] !=  OSC_ARGS[2]){
  clips_playing[clipindex] = OSC_ARGS[2];
+
+ decl c;
+ for(c=0;c<numclips;c++){
+  clip_redraw_list[targettrack*numclips+c] = 1;
+ }
 
  if(clips_playing[clipindex]){
   track_playing[targettrack] = 1;
@@ -561,12 +601,18 @@ if(clips_playing[clipindex] !=  OSC_ARGS[2]){
  }
 }" trigger_script="" trigger_type="2" trigger="1" clock="0" clock_div="4" osc_message="/grid/clip/isPlaying" midi_message="0x90,0x90,0,0" midi_target="-1" flag="9"/>
 <SCRIPT name="osc_cliprecording(OSC_ARGS)" script="decl targettrack = OSC_ARGS[0];
-decl targetclip = OSC_ARGS[1]-1;
+decl targetclip = OSC_ARGS[1];
 
 decl clipindex = numclips*targettrack + targetclip;
 
 if(clips_recording[clipindex] !=  OSC_ARGS[2]){
  clips_recording[clipindex] = OSC_ARGS[2];
+
+ decl c;
+ for(c=0;c<numclips;c++){
+  clip_redraw_list[targettrack*numclips+c] = 1;
+ }
+
  if(clips_recording[clipindex]){
   track_recording[targettrack] = 1;
  }else{
@@ -593,7 +639,23 @@ if(clips_queued[targetclip] !=  OSC_ARGS[2]){
 if(track_selected[targettrack] != OSC_ARGS[1]){
  track_selected[targettrack] = OSC_ARGS[1];
  track_redraw_list[targettrack] = 1;
+ decl c;
+ for(c=0;c<numclips;c++){
+  clip_redraw_list[targettrack*numclips+c] = 1;
+ }
  redraw_needed = 1;
 }" trigger_script="" trigger_type="2" trigger="1" clock="0" clock_div="4" osc_message="/grid/track/selected" midi_message="0x90,0x90,0,0" midi_target="-1" flag="9"/>
+<SCRIPT name="osc_trackrecord(OSC_ARGS)" script="decl targettrack = OSC_ARGS[0];
+
+if(track_recording[targettrack] != OSC_ARGS[1]){
+ track_recording[targettrack] = OSC_ARGS[1];
+ track_redraw_list[targettrack] = 1;
+
+ decl c;
+ for(c=0;c<numclips;c++){
+  clip_redraw_list[targettrack*numclips+c] = 1;
+ }
+ redraw_needed = 1;
+}" trigger_script="" trigger_type="2" trigger="1" clock="0" clock_div="4" osc_message="/grid/track/recarm" midi_message="0x90,0x90,0,0" midi_target="-1" flag="9"/>
 </WINDOW>
 </JZML>
