@@ -215,25 +215,27 @@ for(x=0;x<numtracks;x++){
    canvas_setFillStyle(c,{clip_r[clipnum],clip_g[clipnum],clip_b[clipnum]});
    canvas_fill(c);
    canvas_stroke(c);
-
+
+   if(clips_recording[clipnum]){
+    canvas_beginPath(c);
+    canvas_arc(c,startx+clip_width/2, starty+clip_height/2, clip_width / 6, 0, 3.14*2,0);
+    canvas_setFillStyle(c,color_tracktext);
+    canvas_fill(c);
+    canvas_stroke(c);
+   }else if(clips_playing[clipnum]){
+    canvas_beginPath(c);
+    canvas_moveTo(c,startx + clip_width/2.6 , starty + clip_height/4 );
+    canvas_lineTo(c, startx + clip_width/2.6 , starty + clip_height/1.5);
+    canvas_lineTo(c, startx + clip_width/1.5 , starty + clip_height/2.25 );
+    canvas_setFillStyle(c,color_tracktext);
+    canvas_fill(c);
+    //canvas_stroke(c);
+   }
+
    canvas_setFillStyle(c,{0});
    canvas_fillText(c,clipnames[clipnum],startx + clip_width/2,starty + clip_height/(numclips/2),clip_width - clip_width/numtracks);
 
-  if(clips_recording[clipnum]){
-   canvas_beginPath(c);
-   canvas_arc(c,startx+clip_width/2, starty+clip_height/2, clip_width / 6, 0, 3.14*2,0);
-   canvas_setFillStyle(c,color_tracktext);
-   canvas_fill(c);
-   canvas_stroke(c);
-  }else if(clips_playing[clipnum]){
-   canvas_beginPath(c);
-   canvas_moveTo(c,startx + clip_width/2.6 , starty + clip_height/2.5 );
-   canvas_lineTo(c, startx + clip_width/2.6 , starty + clip_height/1.25);
-   canvas_lineTo(c, startx + clip_width/1.5 , starty + clip_height/1.8 );
-   canvas_setFillStyle(c,color_tracktext);
-   canvas_fill(c);
-   //canvas_stroke(c);
-  }
+
 
   } else{
    canvas_setFillStyle(c,color_emptyclip);
