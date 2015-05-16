@@ -1,4 +1,6 @@
 <JZML>
+<PROJECT version="5220" width="1024" height="724" osc_target="-2" midi_target="-2" kbmouse_target="-2" skin="Pixel"/>
+<WINDOW class="JAZZINTERFACE" text="Default" x="0" y="0" width="1024" height="724" state="1" group="0" font="tahoma,11,0" >
 <WINDOW class="Canvas" text="Cliplauncher" x="0" y="0" width="1024" height="724" id="96" state="5" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" redrawMode="0" touchSupport="2">
 <VARIABLE name="numtracks=" value="8" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/numtracks" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="29810,8313,8253" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="numclips=" value="8" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/numclips" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="79,2,0" kbmouse_scale="0,1,0,1"/>
@@ -40,7 +42,7 @@
 <VARIABLE name="canvas_rendering_optimizations=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/canvas_rendering_optimizations" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="color_emptytrack=" value="0.220000,0.220000,0.220000" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_emptytrack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="78,1,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="color_emptyclip=" value="0.270000,0.270000,0.270000" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_emptyclip" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="79,4,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="redraw_needed=" value="0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/redraw_needed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="redraw_needed=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/redraw_needed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="clipnames=" value="'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/clipnames" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="79,3,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="color_border=" value="0.089800,0.089800,0.089800" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/color_border" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="clips_playing=" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/clips_playing" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -62,7 +64,7 @@
 <VARIABLE name="cursors_id=" value="0,0,0,0,0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/cursors_id" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="multitouch_cursors=" value="5" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/multitouch_cursors" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="clipishit=" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/clipishit" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,13107,16307" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="configured=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/configured" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="configured=" value="0" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/configured" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="hittype_clip_startindex=" value="1" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/hittype_clip_startindex" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="hittype_track=" value="4" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/hittype_track" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="hittype_track_size=" value="8" send="1" osc_target="0" osc_trigger="1" osc_message="/Cliplauncher/hittype_track_size" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -468,7 +470,7 @@ hittype_playscene = 5;
 
 multitouch_cursors = 5;
 
-canvas_rendering_optimizations = 1;
+canvas_rendering_optimizations = 0;
 
 scenenames={'Scene 1','Scene 2','Scene 3','Scene 4','Scene 5','Scene 6','Scene 7','Scene 8'};
 
@@ -657,5 +659,6 @@ if(track_recording[targettrack] != OSC_ARGS[1]){
  }
  redraw_needed = 1;
 }" trigger_script="" trigger_type="2" trigger="1" clock="0" clock_div="4" osc_message="/grid/track/recarm" midi_message="0x90,0x90,0,0" midi_target="-1" flag="9"/>
+</WINDOW>
 </WINDOW>
 </JZML>
